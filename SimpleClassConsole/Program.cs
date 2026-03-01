@@ -276,24 +276,42 @@ namespace SimpleClassConlsole
                 {
                     case "1":
                         Console.Write($"Введіть вартість навчання за місяць для {entrant.GetName()}: ");
-                        tuition = double.Parse(Console.ReadLine());
-                        entrant.TuitionPerMonth = tuition;
+						while (true)
+						{
+							if (double.TryParse(Console.ReadLine(), out tuition))
+								break;
+
+							ShowMessage("Введіть коректне число", ConsoleColor.Red);
+						}
+						entrant.TuitionPerMonth = tuition;
                         entrant.TuitionPerYear = tuition * 10;
                         entrant.TuitionForPeriod = tuition * 40;
                         break;
 
                     case "2":
                         Console.Write($"Введіть вартість навчання за рік для {entrant.GetName()}: ");
-                        tuition = double.Parse(Console.ReadLine());
-                        entrant.TuitionPerYear = tuition;
+						while (true)
+						{
+							if (double.TryParse(Console.ReadLine(), out tuition))
+								break;
+
+							ShowMessage("Введіть коректне число", ConsoleColor.Red);
+						}
+						entrant.TuitionPerYear = tuition;
                         entrant.TuitionPerMonth = tuition / 10;
                         entrant.TuitionForPeriod = entrant.TuitionPerMonth * 40;
                         break;
 
                     case "3":
                         Console.Write($"Введіть вартість навчання за весь період (40 місяців) для {entrant.GetName()}: ");
-                        tuition = double.Parse(Console.ReadLine());
-                        entrant.TuitionForPeriod = tuition;
+						while (true)
+						{
+							if (double.TryParse(Console.ReadLine(), out tuition))
+								break;
+
+							ShowMessage("Введіть коректне число", ConsoleColor.Red);
+						}
+						entrant.TuitionForPeriod = tuition;
                         entrant.TuitionPerMonth = tuition / 40;
                         entrant.TuitionPerYear = entrant.TuitionPerMonth * 10;
                         break;
