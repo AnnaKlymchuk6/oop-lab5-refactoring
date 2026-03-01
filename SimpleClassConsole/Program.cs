@@ -62,8 +62,9 @@ namespace SimpleClassConlsole
                     case "4":
                         if (entrants != null)
                         {
-                            SortEntrantsByPoints(entrants);
-                            ShowMessage("Відсортовано за конкурсним балом.", ConsoleColor.Blue);
+							EntrantSorter.SortByPoints(entrants);
+							PrintEntrants(entrants);
+							ShowMessage("Відсортовано за конкурсним балом.", ConsoleColor.Blue);
                         }
                         else
                             ShowMessage("Спочатку введіть дані!", ConsoleColor.Red);
@@ -72,8 +73,9 @@ namespace SimpleClassConlsole
                     case "5":
                         if (entrants != null)
                         {
-                            SortEntrantsByName(entrants);
-                            ShowMessage("Відсортовано за іменем та балом.", ConsoleColor.Blue);
+							EntrantSorter.SortByName(entrants);
+							PrintEntrants(entrants);
+							ShowMessage("Відсортовано за іменем та балом.", ConsoleColor.Blue);
                         }
                         else
                             ShowMessage("Спочатку введіть дані!", ConsoleColor.Red);
@@ -81,7 +83,7 @@ namespace SimpleClassConlsole
 
                     case "6":
                         if (entrants != null)
-                            SetTuitionForEntrants(entrants);
+							TuitionService.SetTuitionForEntrants(entrants);
                         else
                             ShowMessage("Спочатку введіть дані!", ConsoleColor.Red);
                         break;
@@ -227,102 +229,9 @@ namespace SimpleClassConlsole
             }
         }
 
-        public static int CompareByPointsDescending(Entrant a, Entrant b)
-        {
-            if (a.GetCompMark() < b.GetCompMark()) return 1;
-            if (a.GetCompMark() > b.GetCompMark()) return -1;
-            return 0;
-        }
+        
 
-        public static int CompareByNameThenPoints(Entrant a, Entrant b)
-        {
-            int nameCompare = a.GetName().CompareTo(b.GetName());
-
-            if (nameCompare != 0)
-                return nameCompare;
-
-            if (a.GetCompMark() < b.GetCompMark()) return 1;
-            if (a.GetCompMark() > b.GetCompMark()) return -1;
-            return 0;
-        }
-
-        public static void SortEntrantsByPoints(Entrant[] arr)
-        {
-            Array.Sort(arr, CompareByPointsDescending);
-            Console.WriteLine("Відсортований список за конкурсним балом:");
-            PrintEntrants(arr);
-        }
-
-        public static void SortEntrantsByName(Entrant[] arr)
-        {
-            Array.Sort(arr, CompareByNameThenPoints);
-            Console.WriteLine("Відсортований список за прізвищем і балом:");
-            PrintEntrants(arr);
-        }
-
-        public static void SetTuitionForEntrants(Entrant[] entrants)
-        {
-            Console.WriteLine("\nВиберіть одиниці вимірювання для вартості навчання:");
-            Console.WriteLine("1. За місяць");
-            Console.WriteLine("2. За рік");
-            Console.WriteLine("3. За весь період (40 місяців)");
-            Console.Write("Ваш вибір: ");
-            string choice = Console.ReadLine();
-
-            foreach (var entrant in entrants)
-            {
-                double tuition;
-                switch (choice)
-                {
-                    case "1":
-                        Console.Write($"Введіть вартість навчання за місяць для {entrant.GetName()}: ");
-						while (true)
-						{
-							if (double.TryParse(Console.ReadLine(), out tuition))
-								break;
-
-							ShowMessage("Введіть коректне число", ConsoleColor.Red);
-						}
-						entrant.TuitionPerMonth = tuition;
-                        entrant.TuitionPerYear = tuition * 10;
-                        entrant.TuitionForPeriod = tuition * 40;
-                        break;
-
-                    case "2":
-                        Console.Write($"Введіть вартість навчання за рік для {entrant.GetName()}: ");
-						while (true)
-						{
-							if (double.TryParse(Console.ReadLine(), out tuition))
-								break;
-
-							ShowMessage("Введіть коректне число", ConsoleColor.Red);
-						}
-						entrant.TuitionPerYear = tuition;
-                        entrant.TuitionPerMonth = tuition / 10;
-                        entrant.TuitionForPeriod = entrant.TuitionPerMonth * 40;
-                        break;
-
-                    case "3":
-                        Console.Write($"Введіть вартість навчання за весь період (40 місяців) для {entrant.GetName()}: ");
-						while (true)
-						{
-							if (double.TryParse(Console.ReadLine(), out tuition))
-								break;
-
-							ShowMessage("Введіть коректне число", ConsoleColor.Red);
-						}
-						entrant.TuitionForPeriod = tuition;
-                        entrant.TuitionPerMonth = tuition / 40;
-                        entrant.TuitionPerYear = entrant.TuitionPerMonth * 10;
-                        break;
-
-                    default:
-                        ShowMessage("Невірний вибір! Спробуйте ще раз.", ConsoleColor.Red);
-                        return;
-                }
-            }
-            ShowMessage("Вартість навчання успішно оновлена!", ConsoleColor.Green);
-        }
+        
 
         public static void PrintTuitionInfo(Entrant[] entrants)
         {
