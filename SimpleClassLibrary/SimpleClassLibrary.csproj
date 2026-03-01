@@ -41,6 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EntrantSorter.cs" />
+    <Compile Include="TuitionService.cs" />
     <Compile Include="ZNO.cs" />
     <Compile Include="Entrant.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
