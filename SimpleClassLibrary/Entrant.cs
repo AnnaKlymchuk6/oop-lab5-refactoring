@@ -8,13 +8,13 @@ namespace SimpleClassLibrary
 {
     public class Entrant
     {
-        public string Name;
-        public string IdNum;
-        public double CoursePoints;
-        public double AvgPoints;
-        public ZNO[] ZnoResults;
+		private string Name;
+		private string IdNum;
+		private double CoursePoints;
+		private double AvgPoints;
+		private ZNO[] ZnoResults;
 
-        public double TuitionPerMonth { get; set; }
+		public double TuitionPerMonth { get; set; }
         public double TuitionPerYear { get; set; }
         public double TuitionForPeriod { get; set; }
 
@@ -57,7 +57,7 @@ namespace SimpleClassLibrary
             double znoSum = 0;
             foreach (ZNO z in ZnoResults)
             {
-                znoSum += z.Points;
+                znoSum += z.GetPoints();
             }
             return (znoSum + CoursePoints + AvgPoints) / 3;
         }
@@ -69,10 +69,10 @@ namespace SimpleClassLibrary
 
             foreach (ZNO z in ZnoResults)
             {
-                if (z.Points > maxPoints)
+                if (z.GetPoints() > maxPoints)
                 {
-                    maxPoints = z.Points;
-                    bestSubject = z.Subject;
+                    maxPoints = z.GetPoints();
+                    bestSubject = z.GetSubject();
                 }
             }
 
@@ -86,10 +86,10 @@ namespace SimpleClassLibrary
 
             foreach (ZNO z in ZnoResults)
             {
-                if (z.Points < minPoints)
+                if (z.GetPoints() < minPoints)
                 {
-                    minPoints = z.Points;
-                    worstSubject = z.Subject;
+                    minPoints = z.GetPoints();
+                    worstSubject = z.GetSubject();
                 }
             }
 

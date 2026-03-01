@@ -189,7 +189,7 @@ namespace SimpleClassConlsole
             Console.WriteLine("ZNO:");
             foreach (var z in e.GetZNOResults())
             {
-                Console.WriteLine($" - {z.Subject}: {z.Points}");
+                Console.WriteLine($" - {z.GetSubject()}: {z.GetPoints()}");
             }
 
             Console.WriteLine($"Найкращий предмет: {e.GetBestSubject()}");

@@ -8,10 +8,10 @@ namespace SimpleClassLibrary
 {
     public class ZNO
     {
-        public string Subject;
-        public int Points;
+		private string Subject;
+		private int Points;
 
-        public ZNO() { }
+		public ZNO() { }
 
         public ZNO(string subject, int points)
         {
